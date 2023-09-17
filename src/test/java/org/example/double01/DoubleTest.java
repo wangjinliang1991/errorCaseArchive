@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 public class DoubleTest {
     @Test
@@ -59,9 +61,36 @@ public class DoubleTest {
         float num2 = 3.35f;
         DecimalFormat format = new DecimalFormat("#.##");
 
-        format.setRoundingMode(RoundingMode.DOWN);
+        format.setRoundingMode(RoundingMode.DOWN); //向下取舍
         System.out.println(format.format(num1));
         format.setRoundingMode(RoundingMode.DOWN);
         System.out.println(format.format(num2));
+    }
+
+    @Test
+    public void testDecimalFormat2() {
+        BigDecimal num1 = new BigDecimal("3.35");
+        BigDecimal num2 = num1.setScale(1, BigDecimal.ROUND_DOWN);
+
+        System.out.println(num2);
+        BigDecimal num3 = num1.setScale(1, BigDecimal.ROUND_HALF_UP);//四舍五入
+        System.out.println(num3);
+    }
+
+    @Test
+    public void testBigDecimalEquals() {
+        System.out.println(new BigDecimal("1.0").equals(new BigDecimal("1")));
+    }
+
+    @Test
+    public void testBigDecimalEquals2() {
+        System.out.println(new BigDecimal("1.0").compareTo(new BigDecimal("1")) == 0);
+    }
+
+    @Test
+    public void testBigDecimalHashCode() {
+        Set<BigDecimal> hashSet1 = new HashSet<>();
+        hashSet1.add(new BigDecimal("1.0"));
+        System.out.println(hashSet1.contains(new BigDecimal("1")));//返回false
     }
 }
