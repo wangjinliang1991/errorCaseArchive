@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class DoubleTest {
     @Test
@@ -92,5 +91,25 @@ public class DoubleTest {
         Set<BigDecimal> hashSet1 = new HashSet<>();
         hashSet1.add(new BigDecimal("1.0"));
         System.out.println(hashSet1.contains(new BigDecimal("1")));//返回false
+    }
+
+    @Test
+    public void singleData() {
+        List<List<Map<String, Object>>> filterCondition = new ArrayList<>();
+        Map map = new HashMap();
+        map.put("aa", "bb");
+        List<Map<String, Object>> list = new ArrayList<>();
+        list.add(map);
+        filterCondition.add(list);
+        System.out.println(filterCondition);
+
+        List<Map<String, Object>> conditionItem = new ArrayList<>();
+        Map map1= new HashMap();
+        map1.put("cc","dd");
+        conditionItem.add(map1);
+        for (List<Map<String, Object>> filterItem : filterCondition) {
+            filterItem.addAll(conditionItem);
+        }
+        System.out.println(filterCondition);
     }
 }
